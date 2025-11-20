@@ -1,0 +1,23 @@
+Задание 16. A* для головоломки «15»
+Условие. Найти минимальное число ходов для решения головоломки «15» (4×4) с помощью
+A*.
+Алгоритм: A* с эвристикой «сумма расстояний Манхэттена».
+Язык примера: C++
+int aStarPuzzle(const vector<int>& start) {
+ priority_queue<State, vector<State>, Compare> open;
+ set<vector<int>> closed;
+ open.push({start, 0, heuristic(start)});
+27
+ while (!open.empty()) {
+ State curr = open.top(); open.pop();
+ if (isGoal(curr.board)) return curr.moves;
+ if (closed.count(curr.board)) continue;
+ closed.insert(curr.board);
+ // ДОПИСАТЬ: сгенерировать все допустимые ходы (соседи)
+ // для каждого соседа: рассчитать g, h, добавить в open
+ }
+ return -1; // не найдено
+}
+Что дописать: генерацию соседей (перемещение пустой клетки) и обновление очереди.
+
+
